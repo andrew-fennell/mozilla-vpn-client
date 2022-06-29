@@ -165,7 +165,10 @@ Item {
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                 Component.onCompleted: VPNTutorial.allowItem(leaveTutorialBtn.objectName)
                 buttonColorScheme: VPNTheme.theme.iconButtonDarkBackground
-                onClicked: openLeaveTutorialPopup()
+                onClicked: {
+                    forceCloseTooltip();
+                    openLeaveTutorialPopup();
+                }
 
                 Image {
                     anchors.centerIn: parent

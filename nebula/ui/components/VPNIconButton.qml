@@ -14,6 +14,9 @@ VPNButtonBase {
     property bool skipEnsureVisible: false
     property var accessibleName
     property var buttonColorScheme: VPNTheme.theme.iconButtonLightBackground
+    function forceCloseTooltip() {
+        toolTip.close();
+    }
 
     height: VPNTheme.theme.rowHeight
     width: VPNTheme.theme.rowHeight

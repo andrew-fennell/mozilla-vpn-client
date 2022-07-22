@@ -65,7 +65,7 @@ while [[ $# -gt 0 ]]; do
     shift
     ;;
   --source)
-    RELEASE="bionic focal jammy fedora kinetic"
+    RELEASE="bionic focal jammy kinetic fedora flatpak"
     SOURCEONLY=Y
     shift
     ;;
@@ -191,6 +191,15 @@ $(sed -e '/^%prep/ a %autosetup' ../linux/mozillavpn.spec | grep -v -e "^Version
 EOF
 }
 
+build_flatpak_manifest() {
+cp $WORKDIR/linux/flatpak-pyyaml.yaml flatpak-pyyaml.yaml
+sed -e '1,/[[:space:]]\+sources:/!d' $WORKDIR/linux/org.mozilla.vpn.yml > org.mozilla.vpn.yml
+cat << EOF >> org.mozilla.vpn.yml
+      - type: archive
+        path: mozillavpn_$SHORTVERSION.orig.tar.gz
+EOF
+}
+
 ## For a given distro, build the DSC and debian tarball.
 build_deb_source() {
   local distro=$1
@@ -216,6 +225,11 @@ for distro in $RELEASE; do
       print Y "Building RPM packages for $distro"
       build_rpm_spec
       rpmbuild --define "_srcrpmdir $(pwd)" --define "_sourcedir $(pwd)" -bs mozillavpn.spec
+      ;;
+    
+    flatpak)
+      print Y "Building Flatpak manifest"
+      build_flatpak_manifest
       ;;
 
     *)

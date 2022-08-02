@@ -254,11 +254,3 @@ FEATURE_SIMPLE(unsecuredNetworkNotification,      // Feature ID
                false,                             // Can be flipped off
                QStringList(),                     // feature dependencies
                FeatureCallback_unsecuredNetworkNotification)
-
-FEATURE_SIMPLE(websocket,      // Feature ID
-               "WebSocket",    // Feature name
-               "2.9.0",        // released
-               true,           // Can be flipped on
-               true,           // Can be flipped off
-               QStringList(),  // feature dependencies
-               FeatureCallback_false)

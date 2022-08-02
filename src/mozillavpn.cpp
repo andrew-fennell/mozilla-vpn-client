@@ -234,9 +234,7 @@ void MozillaVPN::initialize() {
 
   m_private->m_ipAddressLookup.initialize();
 
-  if (Feature::get(Feature::Feature_websocket)->isSupported()) {
-    m_private->m_webSocketHandler.initialize();
-  }
+  m_private->m_webSocketHandler.initialize();
 
   AddonManager::instance();
 

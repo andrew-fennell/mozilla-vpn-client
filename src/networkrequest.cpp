@@ -806,12 +806,11 @@ NetworkRequest* NetworkRequest::createForIOSPurchase(Task* parent,
                          "application/json");
 
   QUrl url(apiBaseUrl());
-  url.setPath("/api/v1/vpn/purchases/ios");
+  url.setPath("/api/v2/vpn/purchases/ios");
   r->m_request.setUrl(url);
 
   QJsonObject obj;
-  obj.insert("receipt", QJsonValue(receipt));
-  obj.insert("appId", "org.mozilla.ios.FirefoxVPN");
+  obj.insert("originalTransactionId", QJsonValue(receipt));
 
   QJsonDocument json;
   json.setObject(obj);

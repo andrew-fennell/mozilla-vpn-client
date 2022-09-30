@@ -163,7 +163,7 @@ public class IOSControllerImpl : NSObject {
         if let ipv6Address = IPAddressRange(from: deviceIpv6Address!) {
             interface.addresses = [ipv6Address]
         }
-        interface.dns = [DNSServer(address: dnsServerIP!), DNSServer(address: ipv6GatewayIP!)]
+        interface.dns = [DNSServer(address: ipv6GatewayIP!)]
 
         let config = TunnelConfiguration(name: vpnName, interface: interface, peers: peerConfigurations)
 

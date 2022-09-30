@@ -145,16 +145,15 @@ public class IOSControllerImpl : NSObject {
 
         var peerConfigurationV4 = PeerConfiguration(publicKey: keyData)
         peerConfigurationV4.endpoint = Endpoint(from: serverIpv4AddrIn + ":\(serverPort )")
-        peerConfigurationV4.allowedIPs = []
 
         peerConfigurationV4.allowedIPs = [
                             IPAddressRange(from: "0.0.0.0/0")!,
                             IPAddressRange(from: "::/0")!,
         ]
         
-        var peerConfigurationV6 = PeerConfiguration(publicKey: keyData)
+        let keyDatav6 = PublicKey(base64Key: serverPublicKey)!
+        var peerConfigurationV6 = PeerConfiguration(publicKey: keyDatav6)
         peerConfigurationV6.endpoint = Endpoint(from: serverIpv6AddrIn + ":\(serverPort )")
-        peerConfigurationV6.allowedIPs = []
 
         peerConfigurationV6.allowedIPs = [
                             IPAddressRange(from: "0.0.0.0/0")!,

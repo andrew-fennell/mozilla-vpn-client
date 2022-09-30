@@ -104,7 +104,8 @@ rm -rf mozillavpn.xcodeproj/ || die "Failed to remove things"
 print G "done."
 
 print Y "Importing translation files..."
-python3 scripts/utils/import_languages.py $([[ $QTBINPATH ]] && echo "-q $QTBINPATH") $([[ "$OS" = "macos" ]] && echo "-m" || echo "") || die "Failed to import languages"
+#python3 scripts/utils/import_languages.py $([[ $QTBINPATH ]] && echo "-q $QTBINPATH") $([[ "$OS" = "macos" ]] && echo "-m" || echo "") || die "Failed to import languages"
+python3 scripts/utils/import_languages.py -q $QT_MACOS_BIN || die "Failed to import languages"
 
 print Y "Generating glean samples..."
 python3 scripts/utils/generate_glean.py || die "Failed to generate glean samples"

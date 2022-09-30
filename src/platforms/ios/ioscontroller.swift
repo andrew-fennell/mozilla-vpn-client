@@ -132,7 +132,7 @@ public class IOSControllerImpl : NSObject {
         return true
     }
 
-    @objc func connect(dnsServer: String, serverIpv6Gateway: String, serverPublicKey: String, serverIpv4AddrIn: String, serverPort: Int,  allowedIPAddressRanges: Array<VPNIPAddressRange>, reason: Int, failureCallback: @escaping () -> Void) {
+    @objc func connect(dnsServer: String, serverIpv6Gateway: String, serverIpv4Gateway: String,serverPublicKey: String, serverIpv6AddrIn: String, serverIpv4AddrIn: String, serverPort: Int,  allowedIPAddressRanges: Array<VPNIPAddressRange>, reason: Int, failureCallback: @escaping () -> Void) {
         Logger.global?.log(message: "Connecting")
         assert(tunnel != nil)
 
@@ -143,20 +143,28 @@ public class IOSControllerImpl : NSObject {
         let dnsServerIP = IPv4Address(dnsServer)
         let ipv6GatewayIP = IPv6Address(serverIpv6Gateway)
 
-        var peerConfiguration = PeerConfiguration(publicKey: keyData)
-        peerConfiguration.endpoint = Endpoint(from: serverIpv4AddrIn + ":\(serverPort )")
-        peerConfiguration.allowedIPs = []
+        var peerConfigurationV4 = PeerConfiguration(publicKey: keyData)
+        peerConfigurationV4.endpoint = Endpoint(from: serverIpv4AddrIn + ":\(serverPort )")
+        peerConfigurationV4.allowedIPs = []
 
-        allowedIPAddressRanges.forEach {
-            if (!$0.isIpv6) {
-                peerConfiguration.allowedIPs.append(IPAddressRange(address: IPv4Address($0.address as String)!, networkPrefixLength: $0.networkPrefixLength))
-            } else {
-                peerConfiguration.allowedIPs.append(IPAddressRange(address: IPv6Address($0.address as String)!, networkPrefixLength: $0.networkPrefixLength))
-            }
-        }
+        peerConfigurationV4.allowedIPs = [
+                            IPAddressRange(from: "0.0.0.0/0")!,
+                            IPAddressRange(from: "::/0")!,
+        ]
+        
+        var peerConfigurationV6 = PeerConfiguration(publicKey: keyData)
+        peerConfigurationV6.endpoint = Endpoint(from: serverIpv6AddrIn + ":\(serverPort )")
+        peerConfigurationV6.allowedIPs = []
+
+        peerConfigurationV6.allowedIPs = [
+                            IPAddressRange(from: "0.0.0.0/0")!,
+                            IPAddressRange(from: "::/0")!,
+        ]
+        
 
         var peerConfigurations: [PeerConfiguration] = []
-        peerConfigurations.append(peerConfiguration)
+        peerConfigurations.append(peerConfigurationV4)
+        peerConfigurations.append(peerConfigurationV6)
 
         var interface = InterfaceConfiguration(privateKey: privateKey!)
 

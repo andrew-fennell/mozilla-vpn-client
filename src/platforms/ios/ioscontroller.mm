@@ -129,7 +129,9 @@ void IOSController::activate(const HopConnection& hop, const Device* device, con
 
   [impl connectWithDnsServer:hop.m_dnsServer.toString().toNSString()
            serverIpv6Gateway:hop.m_server.ipv6Gateway().toNSString()
+           serverIpv4Gateway:hop.m_server.ipv4Gateway().toNSString()
              serverPublicKey:hop.m_server.publicKey().toNSString()
+            serverIpv6AddrIn:hop.m_server.ipv6AddrIn().toNSString()
             serverIpv4AddrIn:hop.m_server.ipv4AddrIn().toNSString()
                   serverPort:hop.m_server.choosePort()
       allowedIPAddressRanges:allowedIPAddressRangesNS

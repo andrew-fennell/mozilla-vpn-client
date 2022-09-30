@@ -127,10 +127,10 @@ void IOSController::activate(const HopConnection& hop, const Device* device, con
     [allowedIPAddressRangesNS addObject:[range autorelease]];
   }
 
-  [impl connectWithDnsServer:hop.m_dnsServer.toString().toNSString()
+  [impl connectWithDnsServer:hop.m_dnsServer.toString().toNSString() // ipv4 Guaranteed
            serverIpv6Gateway:hop.m_server.ipv6Gateway().toNSString()
              serverPublicKey:hop.m_server.publicKey().toNSString()
-            serverIpv4AddrIn:hop.m_server.ipv4AddrIn().toNSString()
+            serverIpv6AddrIn:hop.m_server.ipv6AddrIn().toNSString()
                   serverPort:hop.m_server.choosePort()
       allowedIPAddressRanges:allowedIPAddressRangesNS
                       reason:reason

@@ -744,8 +744,8 @@ QList<IPAddress> Controller::getAllowedIPAddressRanges(
       IPAddress(QHostAddress(MULLVAD_PROXY_RANGE), MULLVAD_PROXY_RANGE_LENGTH));
 
   // Allow access to everything not covered by an excluded address.
-  QList<IPAddress> allowedIPv4 = {IPAddress("0.0.0.0/0")};
-  list.append(IPAddress::excludeAddresses(allowedIPv4, excludeIPv4s));
+  //QList<IPAddress> allowedIPv4 = {IPAddress("0.0.0.0/0")};
+  //list.append(IPAddress::excludeAddresses(allowedIPv4, excludeIPv4s));
   QList<IPAddress> allowedIPv6 = {IPAddress("::/0")};
   list.append(IPAddress::excludeAddresses(allowedIPv6, excludeIPv6s));
 #endif

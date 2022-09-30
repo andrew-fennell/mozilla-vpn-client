@@ -42,7 +42,7 @@ public class IOSControllerImpl : NSObject {
 
         stateChangeCallback = callback
         self.privateKey = PrivateKey(rawValue: privateKey)
-        self.deviceIpv4Address = deviceIpv4Address
+        self.deviceIpv4Address = ""
         self.deviceIpv6Address = deviceIpv6Address
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.vpnStatusDidChange(notification:)), name: Notification.Name.NEVPNStatusDidChange, object: nil)
@@ -132,7 +132,7 @@ public class IOSControllerImpl : NSObject {
         return true
     }
 
-    @objc func connect(dnsServer: String, serverIpv6Gateway: String, serverPublicKey: String, serverIpv4AddrIn: String, serverPort: Int,  allowedIPAddressRanges: Array<VPNIPAddressRange>, reason: Int, failureCallback: @escaping () -> Void) {
+    @objc func connect(dnsServer: String, serverIpv6Gateway: String, serverPublicKey: String, serverIpv6AddrIn: String, serverPort: Int,  allowedIPAddressRanges: Array<VPNIPAddressRange>, reason: Int, failureCallback: @escaping () -> Void) {
         Logger.global?.log(message: "Connecting")
         assert(tunnel != nil)
 
@@ -140,11 +140,11 @@ public class IOSControllerImpl : NSObject {
         (tunnel!.protocolConfiguration as? NETunnelProviderProtocol)?.destroyConfigurationReference()
 
         let keyData = PublicKey(base64Key: serverPublicKey)!
-        let dnsServerIP = IPv4Address(dnsServer)
+        let dnsServerIP = IPv6Address(dnsServer)
         let ipv6GatewayIP = IPv6Address(serverIpv6Gateway)
 
         var peerConfiguration = PeerConfiguration(publicKey: keyData)
-        peerConfiguration.endpoint = Endpoint(from: serverIpv4AddrIn + ":\(serverPort )")
+        peerConfiguration.endpoint = Endpoint(from: serverIpv6AddrIn + ":\(serverPort )")
         peerConfiguration.allowedIPs = []
 
         allowedIPAddressRanges.forEach {
@@ -160,15 +160,14 @@ public class IOSControllerImpl : NSObject {
 
         var interface = InterfaceConfiguration(privateKey: privateKey!)
 
-        if let ipv4Address = IPAddressRange(from: deviceIpv4Address!),
-           let ipv6Address = IPAddressRange(from: deviceIpv6Address!) {
-            interface.addresses = [ipv4Address, ipv6Address]
+        if let ipv6Address = IPAddressRange(from: deviceIpv6Address!) {
+            interface.addresses = [ipv6Address]
         }
         interface.dns = [DNSServer(address: dnsServerIP!), DNSServer(address: ipv6GatewayIP!)]
 
         let config = TunnelConfiguration(name: vpnName, interface: interface, peers: peerConfigurations)
 
-        self.configureTunnel(config: config, reason: reason, serverName: serverIpv4AddrIn + ":\(serverPort )", failureCallback: failureCallback)
+        self.configureTunnel(config: config, reason: reason, serverName: serverIpv6AddrIn + ":\(serverPort )", failureCallback: failureCallback)
     }
 
     func configureTunnel(config: TunnelConfiguration, reason: Int, serverName: String, failureCallback: @escaping () -> Void) {

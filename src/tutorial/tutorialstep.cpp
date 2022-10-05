@@ -26,6 +26,7 @@ constexpr int TIMEOUT_ITEM_TIMER_MSEC = 300;
 TutorialStep* TutorialStep::create(AddonTutorial* parent,
                                    const QString& tutorialId,
                                    const QJsonValue& json) {
+  logger.debug() << "create";
   QJsonObject obj = json.toObject();
 
   QString stepId = obj["id"].toString();
@@ -87,6 +88,9 @@ TutorialStep::TutorialStep(AddonTutorial* parent, const QString& element,
 TutorialStep::~TutorialStep() { MVPN_COUNT_DTOR(TutorialStep); }
 
 void TutorialStep::stop() {
+  logger.debug() << m_stepId << "-"
+                 << "stop";
+
   Q_ASSERT(m_started);
   m_started = false;
 
@@ -99,6 +103,9 @@ void TutorialStep::stop() {
 }
 
 void TutorialStep::start() {
+  logger.debug() << m_stepId << "-"
+                 << "start";
+
   Q_ASSERT(!m_started);
   m_started = true;
   m_currentBeforeStep = 0;
@@ -107,6 +114,9 @@ void TutorialStep::start() {
 }
 
 void TutorialStep::startInternal() {
+  logger.debug() << m_stepId << "-"
+                 << "startInternal";
+
   Q_ASSERT(m_started);
 
   if (!Addon::evaluateConditions(m_conditions)) {
@@ -127,6 +137,8 @@ void TutorialStep::startInternal() {
 
   QObject* element = InspectorUtils::findObject(m_element);
   if (!element) {
+    logger.warning() << m_stepId << "-"
+                     << "Could not find hook element for tutorial step";
     m_timer.start(TIMEOUT_ITEM_TIMER_MSEC);
     return;
   }
@@ -145,6 +157,9 @@ void TutorialStep::startInternal() {
 }
 
 bool TutorialStep::itemPicked(const QList<QQuickItem*>& list) {
+  logger.debug() << m_stepId << "-"
+                 << "itemPicked";
+
   QObject* element = InspectorUtils::findObject(m_element);
   if (element) {
     QQuickItem* item = qobject_cast<QQuickItem*>(element);

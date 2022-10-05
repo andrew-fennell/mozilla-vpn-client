@@ -48,6 +48,7 @@ Item {
 
     VPNSegmentedNavigation {
         id: segmentedNav
+        objectName: segmentedNav
 
         property var multiHopEntryServer: [VPNCurrentServer.entryCountryCode, VPNCurrentServer.entryCityName, VPNCurrentServer.localizedEntryCity]
         property var multiHopExitServer: [VPNCurrentServer.exitCountryCode, VPNCurrentServer.exitCityName, VPNCurrentServer.localizedCityName]
@@ -123,4 +124,3 @@ Item {
         }
     }
 }
-

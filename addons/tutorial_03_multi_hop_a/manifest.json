@@ -1,0 +1,43 @@
+{
+  "api_version": "0.1",
+  "id": "tutorial_03_multi_hop_a",
+  "name": "Tutorial: Using multi-hop VPN",
+  "conditions": {
+    "enabled_features": [
+      "multiHop"
+    ]
+  },
+  "type": "tutorial",
+  "tutorial": {
+    "id": "03_multi_hop_a",
+    "image": "qrc:/addons/tutorial_03_multi_hop_a/image.svg",
+    "title": "Using multi-hop VPN",
+    "subtitle": "Follow this walkthrough to learn how to use multi-hop VPN.",
+    "completion_message": "You’ve successfully learned how to set “Using multi-hop VPN”. Would you like to learn more tips and tricks?",
+    "steps": [
+      {
+        "id": "s1",
+        "element": "serverListButton-btn",
+        "tooltip": "Select to choose server locations",
+        "before": {
+          "op": "vpn_off"
+        },
+        "next": {
+          "op": "signal",
+          "qml_emitter": "serverListButton-btn",
+          "signal": "visibleChanged"
+        }
+      },
+      {
+        "id": "s2",
+        "element": "segmentedNav/tabMultiHop",
+        "tooltip": "Select to choose server locations",
+        "next": {
+          "op": "signal",
+          "qml_emitter": "segmentedNav/tabMultiHop",
+          "signal": "visibleChanged"
+        }
+      }
+    ]
+  }
+}

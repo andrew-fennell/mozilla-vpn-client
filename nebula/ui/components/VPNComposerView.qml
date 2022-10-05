@@ -63,13 +63,7 @@ ColumnLayout {
                 }
 
                 if (modelData instanceof VPNComposerBlockText) {
-                    switch(composer.view) {
-                    case VPNComposerView.View.Guide:
-                        return VPNTheme.theme.listSpacing * 0.5
-                    case VPNComposerView.View.Message:
-                    default:
-                        return VPNTheme.theme.vSpacingSmall
-                    }
+                     return VPNTheme.theme.vSpacingSmall
                 }
 
                 if (modelData instanceof VPNComposerBlockOrderedList ||

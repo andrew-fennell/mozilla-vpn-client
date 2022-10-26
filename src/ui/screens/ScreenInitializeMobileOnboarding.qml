@@ -16,5 +16,6 @@ VPNStackView {
 
     Component.onCompleted: function() {
         VPNNavigator.addStackView(VPNNavigator.ScreenInitialize, stackview)
+        stackview.push("qrc:/ui/screens/initialize/ViewMobileOnboarding.qml")
     }
 }

@@ -1,0 +1,19 @@
+{
+  "api_version": "0.1",
+  "id": "tutorial_04_split_tunneling",
+  "name": "Tutorial: Split tunneling",
+  "conditions": {
+    "enabled_features": ["splitTunnel"]
+  },
+  "type": "tutorial",
+  "tutorial": {
+    "id": "04_split_tunneling",
+    "image": "qrc:/addons/tutorial_04_split_tunneling/image.svg",
+    "title": "How to exclude apps from VPN protection",
+    "subtitle": "Follow this walkthrough to learn how to exclude apps from VPN.",
+    "completion_message": "You’ve learned how to exclude apps from VPN protection. Would you like to learn more tips and tricks?",
+    "steps": [
+
+    ]
+  }
+}

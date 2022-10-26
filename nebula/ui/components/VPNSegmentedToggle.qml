@@ -73,8 +73,8 @@ Rectangle {
     }
 
     RowLayout {
+        objectName: "segmentedToggleBtnLayout"
 
-        objectName: "multiHopSelector"
         anchors {
             fill: parent
             topMargin: 8

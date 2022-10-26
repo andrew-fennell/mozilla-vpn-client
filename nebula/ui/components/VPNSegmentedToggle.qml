@@ -71,7 +71,7 @@ Rectangle {
             color: VPNTheme.theme.blueButton.focusOutline
             anchors.fill: parent
             anchors.margins: -3
-            radius: parent.radius + ((-3  * -1) - 1)
+            radius: parent.radius + anchors.margins
             z: -1
 
             visible: {
@@ -120,7 +120,6 @@ Rectangle {
                 }
 
                 onFocusChanged: {
-                    console.log(VPNl18n[segmentLabelStringId] + " " + focus)
                     if(!root.anySegmentFocused()) root.focusedViaClick = false
                 }
 

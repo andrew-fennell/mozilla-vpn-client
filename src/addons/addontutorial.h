@@ -26,6 +26,7 @@ class AddonTutorial final : public Addon {
 
   Q_PROPERTY(QString image MEMBER m_image CONSTANT)
   Q_PROPERTY(bool highlighted READ highlighted CONSTANT)
+  Q_PROPERTY(bool showWarning READ showWarning CONSTANT)
 
   static Addon* create(QObject* parent, const QString& manifestFileName,
                        const QString& id, const QString& name,
@@ -39,6 +40,7 @@ class AddonTutorial final : public Addon {
   const QStringList& allowedItems() const { return m_allowedItems; }
 
   bool highlighted() const { return m_highlighted; }
+  bool showWarning() const { return m_showWarning; }
 
   bool itemPicked(const QList<QQuickItem*>& list);
 
@@ -60,6 +62,7 @@ class AddonTutorial final : public Addon {
   QList<TutorialStep*> m_steps;
   int32_t m_currentStep = -1;
   bool m_highlighted = false;
+  bool m_showWarning = false;
 
   QStringList m_allowedItems;
 

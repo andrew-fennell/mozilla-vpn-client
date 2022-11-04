@@ -8,6 +8,7 @@
   "type": "tutorial",
   "tutorial": {
     "id": "04_split_tunneling",
+    "showWarning": true,
     "image": "qrc:/addons/tutorial_04_split_tunneling/image.svg",
     "title": "How to exclude apps from VPN protection",
     "subtitle": "Follow this walkthrough to learn how to exclude apps from VPN.",

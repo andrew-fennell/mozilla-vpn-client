@@ -4,7 +4,7 @@
     "name": "Guide: what is multi-hop vpn",
     "type": "guide",
     "conditions": {
-        "javascript": "qrc:/addons/guide_07_app_permissions/conditions.js"
+        "enabled_features": ["splitTunnel"]
     },
     "guide": {
         "id": "app_permissions",

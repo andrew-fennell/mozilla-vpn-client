@@ -23,7 +23,9 @@
 #include "tasks/heartbeat/taskheartbeat.h"
 #include "telemetry/gleansample.h"
 
-#if defined(MVPN_LINUX)
+#if defined(MVPN_FLATPAK)
+#  include "platforms/linux/linuxnmcontroller.h"
+#elif defined(MVPN_LINUX)
 #  include "platforms/linux/linuxcontroller.h"
 #elif defined(MVPN_MACOS) || defined(MVPN_WINDOWS)
 #  include "localsocketcontroller.h"
@@ -101,7 +103,9 @@ void Controller::initialize() {
     m_impl.reset(nullptr);
   }
 
-#if defined(MVPN_LINUX)
+#if defined(MVPN_FLATPAK)
+  m_impl.reset(new LinuxNMController());
+#elif defined(MVPN_LINUX)
   m_impl.reset(new LinuxController());
 #elif defined(MVPN_MACOS) || defined(MVPN_WINDOWS)
   m_impl.reset(new LocalSocketController());

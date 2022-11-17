@@ -13,7 +13,7 @@
 #  include "platforms/windows/daemon/windowssplittunnel.h"
 #endif
 
-#ifdef MVPN_LINUX
+#if defined(MVPN_LINUX) && !defined(MVPN_FLATPAK)
 #  include <QProcessEnvironment>
 
 #  include "platforms/linux/linuxdependencies.h"
@@ -107,6 +107,8 @@ bool FeatureCallback_splitTunnel() {
   return true;
 #elif defined(MVPN_WINDOWS)
   return !WindowsSplitTunnel::detectConflict();
+#elif defined(MVPN_FLATPAK)
+  return false;
 #elif defined(MVPN_LINUX)
   static bool initDone = false;
   static bool splitTunnelSupported = false;

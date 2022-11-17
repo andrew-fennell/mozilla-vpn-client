@@ -265,7 +265,7 @@ int CommandUI::run(QStringList& tokens) {
     WindowsStartAtBootWatcher startAtBootWatcher;
 #endif
 
-#ifdef MVPN_LINUX
+#if defined(MVPN_LINUX) && !defined(MVPN_FLATPAK)
     // Dependencies - so far, only for linux.
     if (!LinuxDependencies::checkDependencies()) {
       return 1;

@@ -53,9 +53,33 @@ $ErrorActionPreference = "Stop"
 mkdir $TASK_WORKDIR/cmake_build
 $BUILD_DIR =resolve-path "$TASK_WORKDIR/cmake_build"
 
+# We're in a level-3 push, so therefore we have secret access
+if ($env:MOZ_SCM_LEVEL -eq "3"){
+    # Pull secrets from store
+    ./taskcluster/scripts/get-secret.py -s project/mozillavpn/tokens -k sentry_dsn -f sentry_dsn.txt
+    ./taskcluster/scripts/get-secret.py -s project/mozillavpn/tokens -k sentry_envelope_endpoint -f sentry_envelope_endpoint.txt
+    # Read it into the env
+    $env:SENTRY_DSN = Get-Content sentry_dsn.txt
+    $env:SENTRY_ENDPOINT = Get-Content sentry_envelope_endpoint.txt
+
+    # No longer needed.
+    Remove-Item sentry_dsn.txt
+    Remove-Item sentry_envelope_endpoint.txt
+}
+
 
 cmake --version
-cmake -S . -B $BUILD_DIR -GNinja -DCMAKE_BUILD_TYPE=Release # TODO: Linking breaks horribly with RelWithDebInfo
+if ($env:MOZ_SCM_LEVEL -eq "3"){
+    cmake -S . -B $BUILD_DIR -GNinja ` 
+        -DCMAKE_BUILD_TYPE=Release `
+        -DSENTRY_DSN=$env:SENTRY_DSN `
+        -DSENTRY_ENVELOPE_ENDPOINT=$env:SENTRY_ENDPOINT
+}else{
+    # This a level-1 push, branch commit or a pr. 
+    # We have no access to sentry here.
+    cmake -S . -B $BUILD_DIR -GNinja -DCMAKE_BUILD_TYPE=Release # TODO: Linking breaks horribly with RelWithDebInfo
+}
+
 cmake --build $BUILD_DIR #--config RelWithDebInfo Ignored as we are using ninja
 cmake --build $BUILD_DIR --target msi
 cmake --install $BUILD_DIR --prefix "$TASK_WORKDIR/unsigned"

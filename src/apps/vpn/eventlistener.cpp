@@ -12,14 +12,8 @@
 
 #if defined(MVPN_WINDOWS)
 #  include <windows.h>
-
-#  include "platforms/windows/windowscommons.h"
-
-constexpr const char* UI_PIPE = "\\\\.\\pipe\\mozillavpn.ui";
 #elif defined(MVPN_LINUX)
 #  include <QFileInfo>
-
-constexpr const char* UI_PIPE = "/tmp/mozillavpn.ui.sock";
 #endif
 
 namespace {
@@ -31,15 +25,15 @@ EventListener::EventListener() {
 
   m_server.setSocketOptions(QLocalServer::UserAccessOption);
 
-  logger.debug() << "Server path:" << UI_PIPE;
+  logger.debug() << "Server path:" << pipeLocation();
 
 #ifdef MVPN_LINUX
-  if (QFileInfo::exists(UI_PIPE)) {
-    QFile::remove(UI_PIPE);
+  if (QFileInfo::exists(pipeLocation())) {
+    QFile::remove(pipeLocation());
   }
 #endif
 
-  if (!m_server.listen(UI_PIPE)) {
+  if (!m_server.listen(pipeLocation())) {
     logger.error() << "Failed to listen the daemon path";
     return;
   }
@@ -77,8 +71,8 @@ EventListener::~EventListener() {
   m_server.close();
 
 #ifdef MVPN_LINUX
-  if (QFileInfo::exists(UI_PIPE)) {
-    QFile::remove(UI_PIPE);
+  if (QFileInfo::exists(pipeLocation())) {
+    QFile::remove(pipeLocation());
   }
 #endif
 }
@@ -95,7 +89,7 @@ bool EventListener::checkOtherInstances() {
     return true;
   }
 #else
-  if (!QFileInfo::exists(UI_PIPE)) {
+  if (!QFileInfo::exists(pipeLocation())) {
     logger.warning() << "No other instances found - no unix socket";
     return true;
   }
@@ -104,7 +98,7 @@ bool EventListener::checkOtherInstances() {
   logger.debug() << "Try to communicate with the existing instance";
 
   QLocalSocket socket;
-  socket.connectToServer(UI_PIPE);
+  socket.connectToServer(pipeLocation());
   if (!socket.waitForConnected(1000)) {
     logger.error() << "Connection failed.";
     return true;
@@ -121,4 +115,18 @@ bool EventListener::checkOtherInstances() {
 
   logger.debug() << "Terminating the current process";
   return false;
+}
+
+QString EventListener::pipeLocation() {
+#if defined(MVPN_WINDOWS)
+  return QStringLiteral("\\\\.\\pipe\\mozillavpn.ui");
+#else
+  static QString path;
+  if (path.isEmpty()) {
+    QDir dir(QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation));
+    path = dir.filePath("mozillavpn.ui.sock");
+  }
+
+  return path;
+#endif
 }

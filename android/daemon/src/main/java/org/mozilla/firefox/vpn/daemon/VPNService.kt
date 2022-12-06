@@ -24,6 +24,7 @@ class VPNService : android.net.VpnService() {
     private val tag = "VPNService"
     private var mBinder: VPNServiceBinder = VPNServiceBinder(this)
     val mGlean = GleanUtil(this)
+    val mNotificationHandler = NotificationUtil(this)
     private var mConfig: JSONObject? = null
     private var mConnectionTime: Long = 0
     private var mAlreadyInitialised = false
@@ -250,7 +251,8 @@ class VPNService : android.net.VpnService() {
             .putString("lastConf", json.toString())
             .apply()
 
-        NotificationUtil.get(this)?.show(this) // Go foreground
+        // Go foreground
+        NotificationUtil.CannedNotification(mConfig)?.let { mNotificationHandler.show(it) }
         mGleanTimer.start()
 
         if (useFallbackServer) {
@@ -322,7 +324,7 @@ class VPNService : android.net.VpnService() {
         mConnectionHealth.stop()
         // Clear the notification message, so the content
         // is not "disconnected" in case we connect from a non-client.
-        NotificationUtil.get(this)?.onHide(this)
+        NotificationUtil.CannedNotification(mConfig)?.let { mNotificationHandler.hide(it) }
     }
 
     /**

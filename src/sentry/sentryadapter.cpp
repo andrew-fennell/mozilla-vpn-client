@@ -17,6 +17,7 @@
 #include "tasks/sentry/tasksentry.h"
 #include "taskscheduler.h"
 #include "mozillavpn.h"
+#include "frontend/navigator.h"
 
 namespace {
 SentryAdapter* s_instance = nullptr;
@@ -149,4 +150,22 @@ void SentryAdapter::transportEnvelope(sentry_envelope_t* envelope,
 
   auto t = new TaskSentry(qt_owned_buffer);
   TaskScheduler::scheduleTask(t);
+}
+
+SentryAdapter::UserConsentResult SentryAdapter::hasCrashUploadConsent() {
+  // We have not yet asked the user - let's do that.
+  if (m_userConsent == UserConsentResult::Pending) {
+    Navigator::instance()->requestScreen(Navigator::ScreenCrashReporting);
+  }
+  return m_userConsent;
+}
+// Q_Invokeable
+void SentryAdapter::allowCrashReporting() {
+  m_userConsent = UserConsentResult::Allowed;
+  emit userConsentChanged();
+}
+// Q_Invokeable
+void SentryAdapter::declineCrashReporting() {
+  m_userConsent = UserConsentResult::Forbidden;
+  emit userConsentChanged();
 }

@@ -65,6 +65,10 @@
 #  include "signalhandler.h"
 #endif
 
+#ifdef SENTRY_ENABLED
+#  include "sentry/sentryadapter.h"
+#endif
+
 #ifdef MVPN_WINDOWS
 #  include "eventlistener.h"
 #  include "platforms/windows/windowsstartatbootwatcher.h"
@@ -304,6 +308,16 @@ int CommandUI::run(QStringList& tokens) {
           QQmlEngine::setObjectOwnership(obj, QQmlEngine::CppOwnership);
           return obj;
         });
+
+#ifdef SENTRY_ENABLED
+    qmlRegisterSingletonType<MozillaVPN>(
+        "Mozilla.VPN", 1, 0, "VPNCrashReporter",
+        [](QQmlEngine*, QJSEngine*) -> QObject* {
+          QObject* obj = SentryAdapter::instance();
+          QQmlEngine::setObjectOwnership(obj, QQmlEngine::CppOwnership);
+          return obj;
+        });
+#endif
 
     qmlRegisterSingletonType<MozillaVPN>(
         "Mozilla.VPN", 1, 0, "VPNUser",

@@ -191,6 +191,7 @@ target_sources(unit_tests PRIVATE
     ${MZ_SOURCE_DIR}/apps/vpn/signature.h
     ${MZ_SOURCE_DIR}/apps/vpn/simplenetworkmanager.cpp
     ${MZ_SOURCE_DIR}/apps/vpn/simplenetworkmanager.h
+    ${MZ_SOURCE_DIR}/apps/vpn/sentry/sentryadapter.h
     ${MZ_SOURCE_DIR}/apps/vpn/statusicon.cpp
     ${MZ_SOURCE_DIR}/apps/vpn/statusicon.h
     ${MZ_SOURCE_DIR}/apps/vpn/systemtraynotificationhandler.h
@@ -212,6 +213,8 @@ target_sources(unit_tests PRIVATE
     ${MZ_SOURCE_DIR}/apps/vpn/tasks/release/taskrelease.h
     ${MZ_SOURCE_DIR}/apps/vpn/tasks/servers/taskservers.cpp
     ${MZ_SOURCE_DIR}/apps/vpn/tasks/servers/taskservers.h
+    ${MZ_SOURCE_DIR}/apps/vpn/tasks/sentry/tasksentry.cpp
+    ${MZ_SOURCE_DIR}/apps/vpn/tasks/sentry/tasksentry.h
     ${MZ_SOURCE_DIR}/apps/vpn/theme.cpp
     ${MZ_SOURCE_DIR}/apps/vpn/theme.h
     ${MZ_SOURCE_DIR}/apps/vpn/tutorial/tutorial.cpp
@@ -293,6 +296,7 @@ target_sources(unit_tests PRIVATE
     mocmozillavpn.cpp
     mocnetworkrequest.cpp
     mocsystemtraynotificationhandler.cpp
+    mocsentryadapter.cpp
     helper.h
     testaddon.cpp
     testaddon.h
@@ -340,6 +344,8 @@ target_sources(unit_tests PRIVATE
     teststatusicon.h
     testtasks.cpp
     testtasks.h
+    testtasksentry.cpp
+    testtasksentry.h
     testtemporarydir.cpp
     testtemporarydir.h
     testthemes.cpp

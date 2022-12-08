@@ -36,10 +36,19 @@ target_sources(mozillavpn PRIVATE
     platforms/linux/linuxsystemtraynotificationhandler.h
 )
 
+# There are two places we can look for the embeddable wireguard library.
+if(IS_DIRECTORY ${CMAKE_SOURCE_DIR}/3rdparty/wireguard-tools/contrib/embeddable-wg-library)
+    set(WG_EMBED_SOURCE_DIR ${CMAKE_SOURCE_DIR}/3rdparty/wireguard-tools/contrib/embeddable-wg-library)
+elseif(IS_DIRECTORY /usr/share/doc/wireguard-tools/examples/embeddable-wg-library)
+    set(WG_EMBED_SOURCE_DIR /usr/share/doc/wireguard-tools/examples/embeddable-wg-library)
+else()
+    message(FATAL_ERROR "Unable to locate the embeddable-wg-library. Have you updated the submodules?")
+endif()
+
 # Linux daemon source files
 target_sources(mozillavpn PRIVATE
-    ../3rdparty/wireguard-tools/contrib/embeddable-wg-library/wireguard.c
-    ../3rdparty/wireguard-tools/contrib/embeddable-wg-library/wireguard.h
+    ${WG_EMBED_SOURCE_DIR}/wireguard.c
+    ${WG_EMBED_SOURCE_DIR}/wireguard.h
     daemon/daemon.cpp
     daemon/daemon.h
     daemon/dnsutils.h

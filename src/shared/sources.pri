@@ -21,6 +21,8 @@ SOURCES += \
         $$PWD/localizer.cpp \
         $$PWD/logger.cpp \
         $$PWD/loghandler.cpp \
+        $$PWD/networkmanager.cpp \
+        $$PWD/qmlengineholder.cpp \
         $$PWD/rfc/rfc1112.cpp \
         $$PWD/rfc/rfc1918.cpp \
         $$PWD/rfc/rfc4193.cpp \
@@ -28,6 +30,7 @@ SOURCES += \
         $$PWD/rfc/rfc5735.cpp \
         $$PWD/settingsholder.cpp \
         $$PWD/signature.cpp \
+        $$PWD/simplenetworkmanager.cpp \
         $$PWD/taskscheduler.cpp \
         $$PWD/temporarydir.cpp \
         $$PWD/theme.cpp \
@@ -50,6 +53,8 @@ HEADERS += \
         $$PWD/localizer.h \
         $$PWD/logger.h \
         $$PWD/loghandler.h \
+        $$PWD/networkmanager.h \
+        $$PWD/qmlengineholder.h \
         $$PWD/rfc/rfc1112.h \
         $$PWD/rfc/rfc1918.h \
         $$PWD/rfc/rfc4193.h \
@@ -57,6 +62,7 @@ HEADERS += \
         $$PWD/rfc/rfc5735.h \
         $$PWD/settingsholder.h \
         $$PWD/signature.h \
+        $$PWD/simplenetworkmanager.h \
         $$PWD/task.h \
         $$PWD/taskscheduler.h \
         $$PWD/temporarydir.h \

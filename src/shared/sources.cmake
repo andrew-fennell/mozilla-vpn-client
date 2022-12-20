@@ -50,6 +50,10 @@ target_sources(shared-sources INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/logger.h
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/loghandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/loghandler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/shared/networkmanager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/shared/networkmanager.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/shared/qmlengineholder.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/shared/qmlengineholder.h
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/rfc/rfc1112.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/rfc/rfc1112.h
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/rfc/rfc1918.cpp
@@ -64,6 +68,8 @@ target_sources(shared-sources INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/settingsholder.h
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/signature.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/signature.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/shared/simplenetworkmanager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/shared/simplenetworkmanager.h
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/task.h
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/taskscheduler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/shared/taskscheduler.h

@@ -21,6 +21,9 @@ constexpr const char* SETTINGS_APP_NAME = "vpn";
 // `mozillavpn_it.qm
 constexpr const char* LOCALIZER_FILENAME_PREFIX = "mozillavpn";
 
+// The prefix for the user-agent requests
+constexpr const char* NETWORK_USERAGENT_PREFIX = "MozillaVPN";
+
 // Number of msecs for the captive-portal block alert.
 constexpr uint32_t CAPTIVE_PORTAL_ALERT_MSEC = 4000;
 

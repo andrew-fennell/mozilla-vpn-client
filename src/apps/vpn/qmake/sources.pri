@@ -97,7 +97,6 @@ SOURCES += \
         apps/vpn/models/supportcategorymodel.cpp \
         apps/vpn/models/user.cpp \
         apps/vpn/mozillavpn.cpp \
-        apps/vpn/networkmanager.cpp \
         apps/vpn/networkrequest.cpp \
         apps/vpn/networkwatcher.cpp \
         apps/vpn/notificationhandler.cpp \
@@ -112,11 +111,9 @@ SOURCES += \
         apps/vpn/purchaseiaphandler.cpp \
         apps/vpn/purchasewebhandler.cpp \
         apps/vpn/profileflow.cpp \
-        apps/vpn/qmlengineholder.cpp \
         apps/vpn/releasemonitor.cpp \
         apps/vpn/serveri18n.cpp \
         apps/vpn/serverlatency.cpp \
-        apps/vpn/simplenetworkmanager.cpp \
         apps/vpn/statusicon.cpp \
         apps/vpn/tasks/account/taskaccount.cpp \
         apps/vpn/tasks/adddevice/taskadddevice.cpp \
@@ -253,7 +250,6 @@ HEADERS += \
         apps/vpn/models/supportcategorymodel.h \
         apps/vpn/models/user.h \
         apps/vpn/mozillavpn.h \
-        apps/vpn/networkmanager.h \
         apps/vpn/networkrequest.h \
         apps/vpn/networkwatcher.h \
         apps/vpn/networkwatcherimpl.h \
@@ -269,11 +265,9 @@ HEADERS += \
         apps/vpn/purchasehandler.h \
         apps/vpn/purchaseiaphandler.h \
         apps/vpn/purchasewebhandler.h \
-        apps/vpn/qmlengineholder.h \
         apps/vpn/releasemonitor.h \
         apps/vpn/serveri18n.h \
         apps/vpn/serverlatency.h \
-        apps/vpn/simplenetworkmanager.h \
         apps/vpn/statusicon.h \
         apps/vpn/tasks/account/taskaccount.h \
         apps/vpn/tasks/adddevice/taskadddevice.h \

@@ -16,6 +16,11 @@ void setStaging();
 // This is used by SettingsHolder to configure the QSetting file.
 constexpr const char* SETTINGS_APP_NAME = "vpn";
 
+// The localization filename prefix. The real file name should be called:
+// `LOCALIZER_FILENAME_PREFIX` + '_' + languageCode + ".qm". For instance:
+// `mozillavpn_it.qm
+constexpr const char* LOCALIZER_FILENAME_PREFIX = "mozillavpn";
+
 // Number of msecs for the captive-portal block alert.
 constexpr uint32_t CAPTIVE_PORTAL_ALERT_MSEC = 4000;
 

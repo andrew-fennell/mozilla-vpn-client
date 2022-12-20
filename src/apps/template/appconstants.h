@@ -12,6 +12,11 @@ namespace AppConstants {
 // This is used by SettingsHolder to configure the QSetting file.
 constexpr const char* SETTINGS_APP_NAME = "FooBar";
 
+// The localization filename prefix. The real file name should be called:
+// `LOCALIZER_FILENAME_PREFIX` + '_' + languageCode + ".qm". For instance:
+// `mozillavpn_it.qm
+constexpr const char* LOCALIZER_FILENAME_PREFIX = "foo_bar";
+
 #if defined(__APPLE__)
 // This is the name of the service to encrypt the settings file
 constexpr const char* CRYPTO_SETTINGS_SERVICE = "App FooBar";

@@ -61,7 +61,6 @@ Logger logger("InspectorHandler");
 bool s_stealUrls = false;
 bool s_forwardNetwork = false;
 bool s_mockFreeTrial = false;
-bool s_forceRTL = false;
 
 QString s_updateVersion;
 QStringList s_pickedItems;
@@ -808,7 +807,7 @@ static QList<InspectorCommand> s_commands{
 
     InspectorCommand{"force_rtl", "Force RTL layout", 0,
                      [](InspectorHandler*, const QList<QByteArray>&) {
-                       s_forceRTL = true;
+                       Localizer::instance()->forceRTL();
                        emit SettingsHolder::instance()->languageCodeChanged();
                        return QJsonObject();
                      }},
@@ -982,9 +981,6 @@ bool InspectorHandler::stealUrls() { return s_stealUrls; }
 
 // static
 bool InspectorHandler::mockFreeTrial() { return s_mockFreeTrial; }
-
-// static
-bool InspectorHandler::forceRTL() { return s_forceRTL; }
 
 // static
 QString InspectorHandler::appVersionForUpdate() {

@@ -7,19 +7,14 @@
 #include <QLocalSocket>
 
 #include "logger.h"
-#include "mozillavpn.h"
 #include "qmlengineholder.h"
 
 #if defined(MZ_WINDOWS)
 #  include <windows.h>
 
-#  include "platforms/windows/windowscommons.h"
-
-constexpr const char* UI_PIPE = "\\\\.\\pipe\\mozillavpn.ui";
+#  include "platforms/windows/windowsutils.h"
 #elif defined(MZ_LINUX)
 #  include <QFileInfo>
-
-constexpr const char* UI_PIPE = "/tmp/mozillavpn.ui.sock";
 #endif
 
 namespace {
@@ -31,15 +26,15 @@ EventListener::EventListener() {
 
   m_server.setSocketOptions(QLocalServer::UserAccessOption);
 
-  logger.debug() << "Server path:" << UI_PIPE;
+  logger.debug() << "Server path:" << AppConstants::UI_PIPE;
 
 #ifdef MZ_LINUX
-  if (QFileInfo::exists(UI_PIPE)) {
-    QFile::remove(UI_PIPE);
+  if (QFileInfo::exists(AppConstants::UI_PIPE)) {
+    QFile::remove(AppConstants::UI_PIPE);
   }
 #endif
 
-  if (!m_server.listen(UI_PIPE)) {
+  if (!m_server.listen(AppConstants::UI_PIPE)) {
     logger.error() << "Failed to listen the daemon path";
     return;
   }
@@ -77,8 +72,8 @@ EventListener::~EventListener() {
   m_server.close();
 
 #ifdef MZ_LINUX
-  if (QFileInfo::exists(UI_PIPE)) {
-    QFile::remove(UI_PIPE);
+  if (QFileInfo::exists(AppConstants::UI_PIPE)) {
+    QFile::remove(AppConstants::UI_PIPE);
   }
 #endif
 }
@@ -91,11 +86,11 @@ bool EventListener::checkOtherInstances() {
   QString windowTitle = qtTrId("vpn.main.productName");
   HWND window = FindWindow(nullptr, (const wchar_t*)windowTitle.utf16());
   if (!window) {
-    WindowsCommons::windowsLog("No other instances found");
+    WindowsUtils::windowsLog("No other instances found");
     return true;
   }
 #else
-  if (!QFileInfo::exists(UI_PIPE)) {
+  if (!QFileInfo::exists(AppConstants::UI_PIPE)) {
     logger.warning() << "No other instances found - no unix socket";
     return true;
   }
@@ -104,7 +99,7 @@ bool EventListener::checkOtherInstances() {
   logger.debug() << "Try to communicate with the existing instance";
 
   QLocalSocket socket;
-  socket.connectToServer(UI_PIPE);
+  socket.connectToServer(AppConstants::UI_PIPE);
   if (!socket.waitForConnected(1000)) {
     logger.error() << "Connection failed.";
     return true;

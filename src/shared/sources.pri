@@ -8,6 +8,7 @@ SOURCES += \
         $$PWD/cryptosettings.cpp \
         $$PWD/curve25519.cpp \
         $$PWD/feature.cpp \
+        $$PWD/filterproxymodel.cpp \
         $$PWD/fontloader.cpp \
         $$PWD/glean/gleandeprecated.cpp \
         $$PWD/hacl-star/Hacl_Chacha20.c \
@@ -17,6 +18,7 @@ SOURCES += \
         $$PWD/hawkauth.cpp \
         $$PWD/hkdf.cpp \
         $$PWD/ipaddress.cpp \
+        $$PWD/itempicker.cpp \
         $$PWD/leakdetector.cpp \
         $$PWD/localizer.cpp \
         $$PWD/logger.cpp \
@@ -44,11 +46,13 @@ HEADERS += \
         $$PWD/curve25519.h \
         $$PWD/env.h \
         $$PWD/feature.h \
+        $$PWD/filterproxymodel.h \
         $$PWD/fontloader.h \
         $$PWD/glean/gleandeprecated.h \
         $$PWD/hawkauth.h \
         $$PWD/hkdf.h \
         $$PWD/ipaddress.h \
+        $$PWD/itempicker.h \
         $$PWD/leakdetector.h \
         $$PWD/localizer.h \
         $$PWD/logger.h \

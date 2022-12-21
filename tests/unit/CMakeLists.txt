@@ -128,8 +128,6 @@ target_sources(unit_tests PRIVATE
     ${MZ_SOURCE_DIR}/apps/vpn/inspector/inspectorutils.h
     ${MZ_SOURCE_DIR}/apps/vpn/ipaddresslookup.cpp
     ${MZ_SOURCE_DIR}/apps/vpn/ipaddresslookup.h
-    ${MZ_SOURCE_DIR}/apps/vpn/itempicker.cpp
-    ${MZ_SOURCE_DIR}/apps/vpn/itempicker.h
     ${MZ_SOURCE_DIR}/apps/vpn/models/device.cpp
     ${MZ_SOURCE_DIR}/apps/vpn/models/device.h
     ${MZ_SOURCE_DIR}/apps/vpn/models/devicemodel.cpp
@@ -240,6 +238,8 @@ target_sources(unit_tests PRIVATE
     ${MZ_SOURCE_DIR}/shared/hacl-star/Hacl_Poly1305_32.c
     ${MZ_SOURCE_DIR}/shared/ipaddress.cpp
     ${MZ_SOURCE_DIR}/shared/ipaddress.h
+    ${MZ_SOURCE_DIR}/shared/itempicker.cpp
+    ${MZ_SOURCE_DIR}/shared/itempicker.h
     ${MZ_SOURCE_DIR}/shared/leakdetector.cpp
     ${MZ_SOURCE_DIR}/shared/leakdetector.h
     ${MZ_SOURCE_DIR}/shared/localizer.cpp

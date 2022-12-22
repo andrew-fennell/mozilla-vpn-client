@@ -23,6 +23,7 @@ SOURCES += \
         $$PWD/localizer.cpp \
         $$PWD/logger.cpp \
         $$PWD/loghandler.cpp \
+        $$PWD/models/licensemodel.cpp \
         $$PWD/networkmanager.cpp \
         $$PWD/qmlengineholder.cpp \
         $$PWD/rfc/rfc1112.cpp \
@@ -57,6 +58,7 @@ HEADERS += \
         $$PWD/localizer.h \
         $$PWD/logger.h \
         $$PWD/loghandler.h \
+        $$PWD/models/licensemodel.h \
         $$PWD/networkmanager.h \
         $$PWD/qmlengineholder.h \
         $$PWD/rfc/rfc1112.h \
@@ -88,3 +90,5 @@ ios {
     OBJECTIVE_HEADERS += \
         shared/platforms/ios/ioscommons.h
 }
+
+RESOURCES += shared/resources/license.qrc

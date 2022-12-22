@@ -39,12 +39,10 @@ constexpr const wchar_t* WINDOWS_CRED_KEY = L"Foo bar";
 constexpr const char* ANDROID_LOG_NAME = "foobar";
 #endif
 
-#if defined(MZ_LINUX)
 constexpr const char* LINUX_CRYPTO_SETTINGS_KEY =
     "org.mozilla.foobar.cryptosettings";
 constexpr const char* LINUX_CRYPTO_SETTINGS_DESC =
     "FooBar settings encryption key";
-#endif
 
 // Communication pipe between instances
 #if defined(MZ_WINDOWS)

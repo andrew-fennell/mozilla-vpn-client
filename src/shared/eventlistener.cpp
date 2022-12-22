@@ -4,8 +4,10 @@
 
 #include "eventlistener.h"
 
+#include <QFileInfo>
 #include <QLocalSocket>
 
+#include "appconstants.h"
 #include "logger.h"
 #include "qmlengineholder.h"
 
@@ -13,8 +15,6 @@
 #  include <windows.h>
 
 #  include "platforms/windows/windowsutils.h"
-#elif defined(MZ_LINUX)
-#  include <QFileInfo>
 #endif
 
 namespace {

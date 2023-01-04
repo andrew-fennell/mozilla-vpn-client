@@ -294,7 +294,8 @@ static QList<InspectorCommand> s_commands{
                        QPoint point = pointF.toPoint();
                        point.rx() += item->width() / 2;
                        point.ry() += item->height() / 2;
-                    
+                       QTest::mouseClick(item->window(), Qt::LeftButton,
+                                         Qt::NoModifier, point);
                        return obj;
                      }},
     InspectorCommand{"click_notification", "Click on a notification", 0,

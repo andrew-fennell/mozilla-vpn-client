@@ -170,7 +170,7 @@ void LogHandler::addLog(const Log& log, const MutexLocker& proofOfLock) {
 
 #if defined(MZ_ANDROID) && defined(MZ_DEBUG)
   const char* str = buffer.constData();
-  if (str && !Constants::inProduction()) {
+  if (str) {
     __android_log_write(ANDROID_LOG_DEBUG, "mozillavpn", str);
   }
 #endif

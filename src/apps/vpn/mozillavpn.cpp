@@ -1200,6 +1200,12 @@ void MozillaVPN::activate() {
   // is the right time to do it.
   maybeRegenerateDeviceKey();
 
+  // If there is no server chosen, schedule an automatic server selection.
+  if (!m_private->m_serverData.hasServerData()) {
+    TaskScheduler::scheduleTask(
+        new TaskServerSelect(ErrorHandler::DoNotPropagateError));
+  }
+
   TaskScheduler::scheduleTask(
       new TaskControllerAction(TaskControllerAction::eActivate));
 }

@@ -69,8 +69,6 @@ SOURCES += \
         apps/vpn/frontend/navigator.cpp \
         apps/vpn/frontend/navigatorreloader.cpp \
         apps/vpn/glean/glean.cpp \
-        apps/vpn/glean/private/event.cpp \
-        apps/vpn/glean/private/ping.cpp \
         apps/vpn/keyregenerator.cpp \
         apps/vpn/imageproviderfactory.cpp \
         apps/vpn/inspector/inspectorhandler.cpp \
@@ -149,7 +147,6 @@ SOURCES += \
         apps/vpn/tutorial/tutorialstepnext.cpp \
         apps/vpn/update/updater.cpp \
         apps/vpn/update/versionapi.cpp \
-        apps/vpn/urlopener.cpp \
         apps/vpn/update/webupdater.cpp \
         apps/vpn/websocket/exponentialbackoffstrategy.cpp \
         apps/vpn/websocket/pushmessage.cpp \
@@ -228,10 +225,6 @@ HEADERS += \
         apps/vpn/frontend/navigator.h \
         apps/vpn/frontend/navigatorreloader.h \
         apps/vpn/glean/glean.h \
-        apps/vpn/glean/private/event.h \
-        apps/vpn/glean/private/ping.h \
-        apps/vpn/glean/generated/metrics.h \
-        apps/vpn/glean/generated/pings.h \
         apps/vpn/keyregenerator.h \
         apps/vpn/imageproviderfactory.h \
         apps/vpn/inspector/inspectorhandler.h \
@@ -311,7 +304,6 @@ HEADERS += \
         apps/vpn/update/updater.h \
         apps/vpn/update/versionapi.h \
         apps/vpn/update/webupdater.h \
-        apps/vpn/urlopener.h \
         apps/vpn/websocket/exponentialbackoffstrategy.h \
         apps/vpn/websocket/pushmessage.h \
         apps/vpn/websocket/websockethandler.h

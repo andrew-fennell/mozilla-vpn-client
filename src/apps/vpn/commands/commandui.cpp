@@ -242,9 +242,6 @@ int CommandUI::run(QStringList& tokens) {
     vpn.setStartMinimized(minimizedOption.m_set ||
                           (qgetenv("MVPN_MINIMIZED") == "1"));
 
-#ifdef MZ_ANDROID
-    AndroidGlean::initialize(engine);
-#endif
     if (updateOption.m_set) {
       mozilla::glean::sample::update_step.record(
           mozilla::glean::sample::UpdateStepExtra{
@@ -596,16 +593,11 @@ int CommandUI::run(QStringList& tokens) {
 
     // Here is the main QML file.
     const QUrl url(QStringLiteral("qrc:/ui/main.qml"));
-    QObject::connect(
-        engine, &QQmlApplicationEngine::objectCreated, qApp,
-        [url](QObject* obj, const QUrl& objUrl) {
-          if (!obj && url == objUrl) {
-            logger.error() << "Failed to load " << objUrl.toString();
-            QGuiApplication::exit(-1);
-          }
-        },
-        Qt::QueuedConnection);
     engine->load(url);
+    if (!engineHolder.hasWindow()) {
+      logger.error() << "Failed to load " << url.toString();
+      return -1;
+    }
 
     NotificationHandler* notificationHandler =
         NotificationHandler::create(&engineHolder);

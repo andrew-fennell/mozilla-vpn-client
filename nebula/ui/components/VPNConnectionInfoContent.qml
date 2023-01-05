@@ -124,7 +124,7 @@ VPNFlickable {
                             )
                             subtitle: serverLocations.isMultipHop
                                 ? ""
-                                : VPNCurrentServer.localizedCityName
+                                : VPNCurrentServer.localizedExitCityName
                             iconPath: "qrc:/nebula/resources/flags/"
                                 + VPNCurrentServer.exitCountryCode.toUpperCase()
                                 + ".png"

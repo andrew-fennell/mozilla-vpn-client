@@ -55,13 +55,6 @@ target_sources(auth_tests PRIVATE
     ${MZ_SOURCE_DIR}/apps/vpn/errorhandler.h
     ${MZ_SOURCE_DIR}/apps/vpn/glean/glean.h
     ${MZ_SOURCE_DIR}/apps/vpn/glean/glean.cpp
-    ${MZ_SOURCE_DIR}/apps/vpn/glean/generated/metrics.h
-    ${MZ_SOURCE_DIR}/apps/vpn/glean/generated/pings.h
-    ${MZ_SOURCE_DIR}/apps/vpn/glean/private/event.h
-    ${MZ_SOURCE_DIR}/apps/vpn/glean/private/event.cpp
-    ${MZ_SOURCE_DIR}/apps/vpn/glean/private/ping.h
-    ${MZ_SOURCE_DIR}/apps/vpn/glean/private/ping.cpp
-    ${MZ_SOURCE_DIR}/apps/vpn/glean/metrictypes.h
     ${MZ_SOURCE_DIR}/apps/vpn/inspector/inspectorhandler.h
     ${MZ_SOURCE_DIR}/apps/vpn/models/featuremodel.cpp
     ${MZ_SOURCE_DIR}/apps/vpn/models/featuremodel.h
@@ -98,8 +91,6 @@ target_sources(auth_tests PRIVATE
     ${MZ_SOURCE_DIR}/apps/vpn/update/versionapi.h
     ${MZ_SOURCE_DIR}/apps/vpn/update/webupdater.cpp
     ${MZ_SOURCE_DIR}/apps/vpn/update/webupdater.h
-    ${MZ_SOURCE_DIR}/apps/vpn/urlopener.cpp
-    ${MZ_SOURCE_DIR}/apps/vpn/urlopener.h
     ${MZ_SOURCE_DIR}/shared/constants.cpp
     ${MZ_SOURCE_DIR}/shared/constants.h
     ${MZ_SOURCE_DIR}/shared/cryptosettings.cpp
@@ -137,6 +128,8 @@ target_sources(auth_tests PRIVATE
     ${MZ_SOURCE_DIR}/shared/task.h
     ${MZ_SOURCE_DIR}/shared/taskscheduler.cpp
     ${MZ_SOURCE_DIR}/shared/taskscheduler.h
+    ${MZ_SOURCE_DIR}/shared/urlopener.cpp
+    ${MZ_SOURCE_DIR}/shared/urlopener.h
     ${MZ_SOURCE_DIR}/shared/versionutils.cpp
     ${MZ_SOURCE_DIR}/shared/versionutils.h
 )

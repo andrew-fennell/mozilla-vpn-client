@@ -92,9 +92,7 @@ jobs:
       - name: Install Qt
         shell: bash
         run: |
-          python3 -m pip install aqtinstall
-          # qt6.2.4 for wasm needs the desktop linux installation
-          python3 -m aqt install-qt -O /opt linux desktop 6.2.4
+          sudo apt install -y qt6-declarative-dev-tools
       - name: Run Lint 
         shell: bash
         env:

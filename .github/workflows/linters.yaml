@@ -92,7 +92,8 @@ jobs:
       - name: Install Qt
         shell: bash
         run: |
-          sudo apt install -y qt6-declarative-dev-tools
+          sudo apt-get update
+          sudo apt-get install -y $(./scripts/linux/getdeps.py -a linux/debian/control)
       - name: Run Lint 
         shell: bash
         env:
